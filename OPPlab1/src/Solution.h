@@ -3,12 +3,14 @@
 #include "Matrix.h"
 #include <iostream>
 #include <cmath>
+#include <mpi.h>
 
 #define MAIN_THREAD 0
 
-class AllSolution {
+class UsualSolution {
 private:
-    AllSolution();
+    UsualSolution();
+
 protected:
     static const double ti_plus;
     static const double ti_minus;
@@ -21,7 +23,7 @@ protected:
 
     virtual bool accuracy_check(double epsilon);
 
-    double multiply_v(const double *a, const double *b) const;
+    virtual double multiply_v(const double *a, const double *b) const;
 
     double find_norm(const double *v, int size) const;
 
@@ -30,17 +32,58 @@ protected:
 
 public:
 
-    void print_v(double* v) const;
+    void print_v(double *v) const;
 
-    ~AllSolution();
+    virtual ~UsualSolution();
 
-    explicit AllSolution(int N);
-
+    explicit UsualSolution(int N);
 
     virtual void run(double epsilon);
 
-
-    void print_result();
+    virtual void print_result();
 };
 
+class FirstSolution : public UsualSolution {
+private:
+    int size, rank, block_begin, block_end, block_size;
 
+    void proximity_function() override;
+
+    bool accuracy_check(double epsilon) override;
+
+    double *block_result = nullptr;
+    double *result = nullptr;
+public:
+    explicit FirstSolution(int N);
+
+    ~FirstSolution();
+
+    void print_result() override;
+
+    void run(double epsilon) override;
+};
+
+class SecondSolution : public UsualSolution {
+private:
+    int size, rank, block_begin, block_end, block_size, destination, sender;
+
+    void proximity_function() override;
+
+    bool accuracy_check(double epsilon) override;
+
+    double multiply_v(const double *a, const double *b, int offset, int count) const;
+
+    double find_norm_b();
+
+    double *block_result = nullptr;
+    double *result = nullptr;
+    double* tmp = nullptr;
+public:
+    explicit SecondSolution(int N);
+
+    ~SecondSolution();
+
+    void print_result() override;
+
+    void run(double epsilon) override;
+};

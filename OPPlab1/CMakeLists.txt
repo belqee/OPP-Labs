@@ -18,6 +18,8 @@ add_executable(
         src/Matrix.h
         src/Matrix.cpp
         src/Solution.h
-        src/Solution.cpp
+        src/UsualSolution.cpp
+        src/FirstSolution.cpp
+        src/SecondSolution.cpp
 )
 target_link_libraries(${exe_name} msmpi.lib)

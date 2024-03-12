@@ -1,0 +1,3 @@
+"D:\CLion\CLion 2023.3.4\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\OPPlab1.dir/objects.a
+"D:\CLion\CLion 2023.3.4\bin\mingw\bin\ar.exe" qc CMakeFiles\OPPlab1.dir/objects.a @CMakeFiles\OPPlab1.dir\objects1.rsp
+"D:\CLion\CLion 2023.3.4\bin\mingw\bin\g++.exe" -g -Wl,--whole-archive CMakeFiles\OPPlab1.dir/objects.a -Wl,--no-whole-archive -o D:\CLion\Projects\OPP-Labs\OPPlab1\out\OPPlab1.exe -Wl,--out-implib,libOPPlab1.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\OPPlab1.dir\linkLibs.rsp

@@ -1,0 +1,10 @@
+^D:\CLION\PROJECTS\OPP-LABS\OPPLAB1\BUILD\CMAKEFILES\AA8E0E302CC13E37145ABDBD43F5EDD1\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/CLion/Projects/OPP-Labs/OPPlab1 -BD:/CLion/Projects/OPP-Labs/OPPlab1/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/CLion/Projects/OPP-Labs/OPPlab1/build/OPPlab1.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

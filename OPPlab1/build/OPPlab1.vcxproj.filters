@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\CLion\Projects\OPP-Labs\OPPlab1\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CLion\Projects\OPP-Labs\OPPlab1\src\Matrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CLion\Projects\OPP-Labs\OPPlab1\src\UsualSolution.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CLion\Projects\OPP-Labs\OPPlab1\src\FirstSolution.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CLion\Projects\OPP-Labs\OPPlab1\src\SecondSolution.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\CLion\Projects\OPP-Labs\OPPlab1\src\Matrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\CLion\Projects\OPP-Labs\OPPlab1\src\Solution.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\CLion\Projects\OPP-Labs\OPPlab1\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{E5512B28-3995-32AE-9554-97ACAD0CA1BF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{1A57E5C1-98D6-3A0D-B6F8-CA3773EAD120}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
