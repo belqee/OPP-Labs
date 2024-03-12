@@ -21,9 +21,9 @@ SecondSolution::SecondSolution(int N) : UsualSolution(N) {
     delete[] b;
     x = new double[block_size];
     b = new double[block_size];
-    block_result = new double[block_size];
-    tmp = new double[block_size];
-    result = new double[block_size];
+    block_result = new double[N];
+    tmp = new double[N];
+    result = new double[N];
     for (int i = block_begin, j = 0; i < block_end; i++, j++) {
         this->x[j] = x[i];
         this->b[j] = b[i];
@@ -80,27 +80,32 @@ void SecondSolution::proximity_function() {
         MPI_Sendrecv(&x[0], block_size, MPI_DOUBLE, destination, 0,
                      &tmp[0], block_size, MPI_DOUBLE, sender, MPI_ANY_TAG,
                      MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        for (int i = 0; i < block_size; i++) {
+        for (int i = 0; i < block_size; ++i) {
             x[i] = tmp[i];
         }
     }
     for (int i = 0; i < block_size; i++) {
         x[i] = x[i] - ti * (block_result[i] - b[i]);
     }
+    // MPI_Sendrecv_replace(&x[0], block_size, MPI_DOUBLE, destination, 0, sender, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 }
 
 bool SecondSolution::accuracy_check(double epsilon) {
-
     for (int i = 0; i < block_size; ++i) {
         result[i] = 0;
     }
     for (int k = 0; k < size; k++) {
         int block = (rank + k) % size;
+
         for (int i = block_begin, j = 0; i < block_end; i++, j++) {
             result[j] += multiply_v(A[i], x, block * block_size, block_size);
         }
-        MPI_Sendrecv_replace(&x[0], block_size, MPI_DOUBLE, destination, 0, sender, MPI_ANY_TAG, MPI_COMM_WORLD,
-                             MPI_STATUS_IGNORE);
+        MPI_Sendrecv(x, block_size, MPI_DOUBLE, destination, 0,
+                     tmp, block_size, MPI_DOUBLE, sender, MPI_ANY_TAG,
+                     MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        for (int i = 0; i < block_size; ++i) {
+            x[i] = tmp[i];
+        }
     }
     double part_norm = 0;
     for (int i = 0; i < block_size; i++) {
@@ -129,5 +134,4 @@ void SecondSolution::print_result() {
     if (rank == 0) {
         cout << endl;
     }
-
 }
