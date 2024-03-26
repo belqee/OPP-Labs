@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/OPPlab1.dir/src/All.cpp.obj"
+  "CMakeFiles/OPPlab1.dir/src/All.cpp.obj.d"
   "CMakeFiles/OPPlab1.dir/src/FirstSolution.cpp.obj"
   "CMakeFiles/OPPlab1.dir/src/FirstSolution.cpp.obj.d"
   "CMakeFiles/OPPlab1.dir/src/Matrix.cpp.obj"

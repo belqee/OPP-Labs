@@ -10,7 +10,6 @@ void FirstSolution::proximity_function() {
     delete[] new_x;
 }
 
-
 bool FirstSolution::accuracy_check(double epsilon) {
     for (int i = block_begin, j = 0; j < block_size; i++, j++) {
         block_result[j] = multiply_v(A[i], x) - b[i];
@@ -22,7 +21,6 @@ bool FirstSolution::accuracy_check(double epsilon) {
 }
 
 FirstSolution::FirstSolution(int N) : UsualSolution(N) {
-
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     block_size = (N + size - 1) / size;

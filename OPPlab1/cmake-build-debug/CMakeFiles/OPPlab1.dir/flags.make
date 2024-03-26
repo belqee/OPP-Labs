@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = @CMakeFiles/OPPlab1.dir/includes_CXX.rsp
 
-CXX_FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+CXX_FLAGS =  /O3 /Wall /WX -g -std=gnu++17 -fdiagnostics-color=always
 

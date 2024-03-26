@@ -2,3 +2,8 @@
 -- Configuring done (0.1s)
 -- Generating done (0.0s)
 -- Build files have been written to: D:/CLion/Projects/OPP-Labs/OPPlab1/cmake-build-debug
+
+Problems were encountered while collecting compiler information:
+	cc1plus.exe: fatal error: /O3: No such file or directory
+	cc1plus.exe: fatal error: /Wall: No such file or directory
+	cc1plus.exe: fatal error: /WX: No such file or directory

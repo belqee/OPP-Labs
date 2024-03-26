@@ -22,4 +22,6 @@ add_executable(
         src/FirstSolution.cpp
         src/SecondSolution.cpp
 )
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /O3 /Wall /WX")
+
 target_link_libraries(${exe_name} msmpi.lib)
