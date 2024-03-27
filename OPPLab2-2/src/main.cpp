@@ -62,7 +62,7 @@ void Matrix::show() {
 
 int N = 9600;
 const double t_plus = 0.00001;
-const double epsilon = 0.0001;
+const double epsilon = 0.00001;
 
 double multiply_v(const double *a, const std::vector<double> &b) {
     double result = 0.0;
@@ -77,12 +77,12 @@ void proximity() {
 }
 
 int main(int argc, char **argv) {
-    omp_set_num_threads(16);
+    omp_set_num_threads(4);
 
     Matrix A(N);
     std::vector<double> b(N, N + 1);
     std::vector<double> result(N);
-    std::vector<double> x1(N, 5.0);
+    std::vector<double> x(N, 0.0);
     std::vector<double> new_x(N);
 
     const double ep = epsilon * epsilon;
@@ -90,43 +90,43 @@ int main(int argc, char **argv) {
     double res = 0.0;
 
     auto start_time = std::chrono::high_resolution_clock::now();
-#pragma omp parallel shared(N, b, x1, A, new_x, b_norm, res)
-
-    do {
-        cout << "!";
+#pragma omp parallel shared(N, b, x, A, new_x, b_norm, res)
+    {
+        do {
 #pragma omp single
-        {
-
-            res = 0.0;
-
-
-#pragma omp for
-            for (int i = 0; i < N; i++) {
-                new_x[i] = multiply_v(A[i], x1);
-            }
-#pragma omp for
-            for (int i = 0; i < N; i++) {
-                new_x[i] = x1[i] - t_plus * (new_x[i] - b[i]);
-            }
-#pragma omp critical
             {
-                x1 = new_x;
+                res = 0.0;
+                b_norm = 0;
             }
+            {
 #pragma omp for
-            for (int i = 0; i < N; i++) {
-                result[i] = multiply_v(A[i], x1) - b[i];
-            }
+                for (int i = 0; i < N; i++) {
+                    new_x[i] = multiply_v(A[i], x);
+                }
+#pragma omp for
+                for (int i = 0; i < N; i++) {
+                    new_x[i] = x[i] - t_plus * (new_x[i] - b[i]);
+                }
+#pragma omp single
+                {
+                    x = new_x;
+                }
+#pragma omp for
+                for (int i = 0; i < N; i++) {
+                    result[i] = multiply_v(A[i], x) - b[i];
+                }
 #pragma omp for reduction(+:res)
-            for (int i = 0; i < N; i++) {
-                res += result[i] * result[i];
-            }
+                for (int i = 0; i < N; i++) {
+                    res += result[i] * result[i];
+                }
 #pragma omp for reduction(+:b_norm)
-            for (int i = 0; i < b.size(); i++) {
-                b_norm += b[i] * b[i];
+                for (int i = 0; i < b.size(); i++) {
+                    b_norm += b[i] * b[i];
+                }
             }
-        }
-
-    } while (!(res / b_norm < ep));
+        } while (res / b_norm >= ep * ep);
+    }
+    cout << x[1];
     auto end_time = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
     std::cout << "Time passed: " << duration.count() << " micsec" << std::endl;

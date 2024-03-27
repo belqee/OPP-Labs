@@ -4,11 +4,11 @@
 
 int main(int argc, char **argv)
 {
-    omp_set_num_threads(2);
+    omp_set_num_threads(16);
 
         auto start_time = std::chrono::high_resolution_clock::now();
         FirstSolution usual(9600);
-        usual.run(0.0001);
+        usual.run(0.00001);
         //usual.print_result();
 
         auto end_time = std::chrono::high_resolution_clock::now();
