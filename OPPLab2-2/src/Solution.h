@@ -71,3 +71,27 @@ public:
 
 };
 
+class SecondSolution : public UsualSolution {
+private:
+    int size, rank, block_begin, block_end, block_size, destination, sender;
+
+    void proximity_function() override;
+
+    bool accuracy_check(double epsilon) override;
+
+    double multiply_v(const double *a, const double *b, int offset, int count) const;
+
+    double find_norm_b();
+
+    double *block_result = nullptr;
+    double *result = nullptr;
+    double *tmp = nullptr;
+public:
+    explicit SecondSolution(int N);
+
+    ~SecondSolution();
+
+    void print_result() override;
+
+    void run(double epsilon) override;
+};
