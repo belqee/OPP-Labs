@@ -73,23 +73,15 @@ double multiply_v(const double *a, const std::vector<double> &b) {
 }
 
 void proximity() {
-
-}
-
-int main(int argc, char **argv) {
-    omp_set_num_threads(4);
-
     Matrix A(N);
     std::vector<double> b(N, N + 1);
     std::vector<double> result(N);
     std::vector<double> x(N, 0.0);
     std::vector<double> new_x(N);
-
-    const double ep = epsilon * epsilon;
     double b_norm = 0;
     double res = 0.0;
 
-    auto start_time = std::chrono::high_resolution_clock::now();
+
 #pragma omp parallel shared(N, b, x, A, new_x, b_norm, res)
     {
         do {
@@ -124,9 +116,14 @@ int main(int argc, char **argv) {
                     b_norm += b[i] * b[i];
                 }
             }
-        } while (res / b_norm >= ep * ep);
+        } while (res / b_norm >= epsilon * epsilon);
     }
-    cout << x[1];
+}
+
+int main(int argc, char **argv) {
+    omp_set_num_threads(4);
+    auto start_time = std::chrono::high_resolution_clock::now();
+    proximity();
     auto end_time = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
     std::cout << "Time passed: " << duration.count() << " micsec" << std::endl;
