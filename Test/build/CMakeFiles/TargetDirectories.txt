@@ -1,0 +1,3 @@
+D:/CLion/Projects/OPP-Labs/Test/build/CMakeFiles/OPPlab1.dir
+D:/CLion/Projects/OPP-Labs/Test/build/CMakeFiles/ALL_BUILD.dir
+D:/CLion/Projects/OPP-Labs/Test/build/CMakeFiles/ZERO_CHECK.dir

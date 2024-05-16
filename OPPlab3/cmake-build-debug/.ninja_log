@@ -1,0 +1,9 @@
+# ninja log v5
+1	124	7375559705760172	build.ninja	ccffe429ce2d7889
+0	108	7375559705760172	build.ninja	ccffe429ce2d7889
+0	244	7375559708387949	CMakeFiles/OPPlab3.dir/src/main.c.obj	6d3c54600f5d074a
+244	417	7375559710103541	D:/CLion/Projects/OPP-Labs/OPPlab3/out/OPPlab3.exe	1fbc65d9b71cb169
+1	122	7375573575243890	CMakeFiles/OPPlab3.dir/src/main.c.obj	6d3c54600f5d074a
+122	246	7375573576479255	D:/CLion/Projects/OPP-Labs/OPPlab3/out/OPPlab3.exe	1fbc65d9b71cb169
+2	147	7375581527233796	CMakeFiles/OPPlab3.dir/src/main.c.obj	6d3c54600f5d074a
+147	272	7375581528471102	D:/CLion/Projects/OPP-Labs/OPPlab3/out/OPPlab3.exe	1fbc65d9b71cb169

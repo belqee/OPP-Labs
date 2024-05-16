@@ -128,30 +128,6 @@ OPPlab1/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\OPPlab1.dir\build.make CMakeFiles/OPPlab1.dir/build
 .PHONY : OPPlab1/fast
 
-src/All.obj: src/All.cpp.obj
-.PHONY : src/All.obj
-
-# target to build an object file
-src/All.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\OPPlab1.dir\build.make CMakeFiles/OPPlab1.dir/src/All.cpp.obj
-.PHONY : src/All.cpp.obj
-
-src/All.i: src/All.cpp.i
-.PHONY : src/All.i
-
-# target to preprocess a source file
-src/All.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\OPPlab1.dir\build.make CMakeFiles/OPPlab1.dir/src/All.cpp.i
-.PHONY : src/All.cpp.i
-
-src/All.s: src/All.cpp.s
-.PHONY : src/All.s
-
-# target to generate assembly for a file
-src/All.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\OPPlab1.dir\build.make CMakeFiles/OPPlab1.dir/src/All.cpp.s
-.PHONY : src/All.cpp.s
-
 src/FirstSolution.obj: src/FirstSolution.cpp.obj
 .PHONY : src/FirstSolution.obj
 
@@ -281,9 +257,6 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... OPPlab1
-	@echo ... src/All.obj
-	@echo ... src/All.i
-	@echo ... src/All.s
 	@echo ... src/FirstSolution.obj
 	@echo ... src/FirstSolution.i
 	@echo ... src/FirstSolution.s

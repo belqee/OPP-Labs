@@ -90,32 +90,32 @@ void proximity() {
                 res = 0.0;
                 b_norm = 0;
             }
-            {
-#pragma omp for
-                for (int i = 0; i < N; i++) {
-                    new_x[i] = multiply_v(A[i], x);
-                }
-#pragma omp for
-                for (int i = 0; i < N; i++) {
-                    new_x[i] = x[i] - t_plus * (new_x[i] - b[i]);
-                }
-#pragma omp single
-                {
-                    x = new_x;
-                }
-#pragma omp for
-                for (int i = 0; i < N; i++) {
-                    result[i] = multiply_v(A[i], x) - b[i];
-                }
-#pragma omp for reduction(+:res)
-                for (int i = 0; i < N; i++) {
-                    res += result[i] * result[i];
-                }
-#pragma omp for reduction(+:b_norm)
-                for (int i = 0; i < b.size(); i++) {
-                    b_norm += b[i] * b[i];
-                }
+
+#pragma omp for //schedule(dynamic, atoi(argv[1])) reduction(+:new_x)
+            for (int i = 0; i < N; i++) {
+                new_x[i] = multiply_v(A[i], x);
             }
+#pragma omp for
+            for (int i = 0; i < N; i++) {
+                new_x[i] = x[i] - t_plus * (new_x[i] - b[i]);
+            }
+#pragma omp single
+            {
+                x = new_x;
+            }
+#pragma omp for
+            for (int i = 0; i < N; i++) {
+                result[i] = multiply_v(A[i], x) - b[i];
+            }
+#pragma omp for reduction(+:res)
+            for (int i = 0; i < N; i++) {
+                res += result[i] * result[i];
+            }
+#pragma omp for reduction(+:b_norm)
+            for (int i = 0; i < b.size(); i++) {
+                b_norm += b[i] * b[i];
+            }
+
         } while (res / b_norm >= epsilon * epsilon);
     }
 }

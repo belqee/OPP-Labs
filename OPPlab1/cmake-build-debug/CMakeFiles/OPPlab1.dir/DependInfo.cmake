@@ -8,7 +8,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "D:/CLion/Projects/OPP-Labs/OPPlab1/src/All.cpp" "CMakeFiles/OPPlab1.dir/src/All.cpp.obj" "gcc" "CMakeFiles/OPPlab1.dir/src/All.cpp.obj.d"
   "D:/CLion/Projects/OPP-Labs/OPPlab1/src/FirstSolution.cpp" "CMakeFiles/OPPlab1.dir/src/FirstSolution.cpp.obj" "gcc" "CMakeFiles/OPPlab1.dir/src/FirstSolution.cpp.obj.d"
   "D:/CLion/Projects/OPP-Labs/OPPlab1/src/Matrix.cpp" "CMakeFiles/OPPlab1.dir/src/Matrix.cpp.obj" "gcc" "CMakeFiles/OPPlab1.dir/src/Matrix.cpp.obj.d"
   "D:/CLion/Projects/OPP-Labs/OPPlab1/src/SecondSolution.cpp" "CMakeFiles/OPPlab1.dir/src/SecondSolution.cpp.obj" "gcc" "CMakeFiles/OPPlab1.dir/src/SecondSolution.cpp.obj.d"

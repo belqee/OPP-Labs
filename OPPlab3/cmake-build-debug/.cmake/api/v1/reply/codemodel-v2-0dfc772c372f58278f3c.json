@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "OPPlab1",
+					"name" : "OPPlab3",
 					"targetIndexes" : 
 					[
 						0
@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "OPPlab1::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-OPPlab1-Debug-bad003781edd208d8dfb.json",
-					"name" : "OPPlab1",
+					"id" : "OPPlab3::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-OPPlab3-Debug-c8b0875d764a99d47e42.json",
+					"name" : "OPPlab3",
 					"projectIndex" : 0
 				}
 			]
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/CLion/Projects/OPP-Labs/OPPlab1/cmake-build-debug",
-		"source" : "D:/CLion/Projects/OPP-Labs/OPPlab1"
+		"build" : "D:/CLion/Projects/OPP-Labs/OPPlab3/cmake-build-debug",
+		"source" : "D:/CLion/Projects/OPP-Labs/OPPlab3"
 	},
 	"version" : 
 	{
