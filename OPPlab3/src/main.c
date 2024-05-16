@@ -67,20 +67,20 @@ void colmRowInitialization(MPIData *MPIdata) {
     MPI_Cart_sub(MPIdata->commGrib, remains_dims, &MPIdata->commRow);
 }
 
-void gribInitialization(MPIData *MPIdata, Matrix *matrix1, Matrix *matrix2) {
-    int *dims = calloc(2, sizeof(int));
-    int reorder = 0;
+void MakeGrib(MPIData *MPIdata, Matrix *matrix1, Matrix *matrix2) {
     int size;
     MPI_Comm_size(MPI_COMM_WORLD, &size);
+    int *dims = calloc(2, sizeof(int));
     MPI_Dims_create(size, 2, dims);
-    int periods[2] = {0, 0};
+    int periods[2] = {0, 0}; //массив флагов. 0 - нет цикла
+    int reorder = 0; //флаг переупоряд. процессов
     MPI_Cart_create(MPI_COMM_WORLD, 2, dims, periods, reorder, &MPIdata->commGrib);
     MPIdata->dims = dims;
     MPI_Type_contiguous(matrix1->cols, MPI_DOUBLE, &MPIdata->rowType);
     MPI_Datatype colTmp;
     MPI_Type_vector(matrix2->rows, 1, matrix2->cols, MPI_DOUBLE, &colTmp);
     MPI_Type_commit(&colTmp);
-    MPI_Type_create_resized(colTmp, 0, 1 * sizeof(double), &MPIdata->colType);
+    MPI_Type_create_resized(colTmp, 0, sizeof(double), &MPIdata->colType);
     MPI_Type_commit(&MPIdata->rowType);
     MPI_Type_commit(&MPIdata->colType);
     colmRowInitialization(MPIdata);
@@ -266,8 +266,6 @@ int main(int argc, char *argv[]) {
     MPI_Init(&argc, &argv);
     int rank;
     clock_t start, end;
-
-
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     if (rank == 0){
@@ -302,7 +300,7 @@ int main(int argc, char *argv[]) {
     Matrix processMatrix2;
     Matrix processResult;
 
-    gribInitialization(&MPIdata, &matrix1, &matrix2);
+    MakeGrib(&MPIdata, &matrix1, &matrix2);
 
     if (row1 % MPIdata.dims[0] != 0 || col2 % MPIdata.dims[1] != 0) {
         if (rank == 0) {
