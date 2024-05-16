@@ -86,67 +86,67 @@ void MakeGrib(MPIData *MPIdata, Matrix *matrix1, Matrix *matrix2) {
     colmRowInitialization(MPIdata);
 }
 
-int StepOne(MPIData *MPIdata, Matrix *matrix, Matrix *proccesMatrixRow) {
-    int rank, size;
-    MPI_Comm_rank(MPIdata->commRow, &rank);
-    MPI_Comm_size(MPIdata->commRow, &size);
-
-    int *sendCounts = (int *) malloc(sizeof(int) * size);
-    if (!sendCounts) {
-        perror("Memory error");
-        return ENOMEM;
-    }
-    int *displs = (int *) malloc(sizeof(int) * size);
-    if (!displs) {
-        free(sendCounts);
-        perror("Memory error");
-        return ENOMEM;
-    }
-    int countForProcess = matrix->rows / size;
-
-    for (int i = 0; i < size; ++i) {
-        sendCounts[i] = countForProcess;
-        displs[i] = (matrix->rows / size) * i * matrix->cols;
-    }
-
-    MPI_Scatterv(matrix->data, sendCounts, displs, MPIdata->rowType,
-                 proccesMatrixRow->data, countForProcess, MPIdata->rowType, 0, MPIdata->commRow);
-
-    free(sendCounts);
-    free(displs);
-    return 0;
-}
-
-int StepTwo(MPIData *MPIdata, Matrix *matrix, Matrix *proccesMatrixCol) {
-    int rank, size;
-    MPI_Comm_rank(MPIdata->commCol, &rank);
-    MPI_Comm_size(MPIdata->commCol, &size);
-
-    int *sendCounts = (int *) malloc(sizeof(int) * size);
-    if (!sendCounts) {
-        perror("Memory error");
-        return ENOMEM;
-    }
-    int *displs = (int *) malloc(sizeof(int) * size);
-    if (!sendCounts) {
-        free(sendCounts);
-        perror("Memory error");
-        return ENOMEM;
-    }
-    int countForProcess = matrix->cols / size;
-
-    for (int i = 0; i < size; i++) {
-        sendCounts[i] = countForProcess;
-        displs[i] = i;
-    }
-
-    MPI_Scatterv(matrix->data, sendCounts, displs, MPIdata->colType,
-                 proccesMatrixCol->data, countForProcess, MPIdata->colType, 0, MPIdata->commCol);
-
-    free(sendCounts);
-    free(displs);
-    return 0;
-}
+//int StepOne(MPIData *MPIdata, Matrix *matrix, Matrix *proccesMatrixRow) {
+//    int rank, size;
+//    MPI_Comm_rank(MPIdata->commRow, &rank);
+//    MPI_Comm_size(MPIdata->commRow, &size);
+//
+//    int *sendCounts = (int *) malloc(sizeof(int) * size);
+//    if (!sendCounts) {
+//        perror("Memory error");
+//        return ENOMEM;
+//    }
+//    int *displs = (int *) malloc(sizeof(int) * size);
+//    if (!displs) {
+//        free(sendCounts);
+//        perror("Memory error");
+//        return ENOMEM;
+//    }
+//    int countForProcess = matrix->rows / size;
+//
+//    for (int i = 0; i < size; ++i) {
+//        sendCounts[i] = countForProcess;
+//        displs[i] = (matrix->rows / size) * i * matrix->cols;
+//    }
+//
+//    MPI_Scatterv(matrix->data, sendCounts, displs, MPIdata->rowType,
+//                 proccesMatrixRow->data, countForProcess, MPIdata->rowType, 0, MPIdata->commRow);
+//
+//    free(sendCounts);
+//    free(displs);
+//    return 0;
+//}
+//
+//int StepTwo(MPIData *MPIdata, Matrix *matrix, Matrix *proccesMatrixCol) {
+//    int rank, size;
+//    MPI_Comm_rank(MPIdata->commCol, &rank);
+//    MPI_Comm_size(MPIdata->commCol, &size);
+//
+//    int *sendCounts = (int *) malloc(sizeof(int) * size);
+//    if (!sendCounts) {
+//        perror("Memory error");
+//        return ENOMEM;
+//    }
+//    int *displs = (int *) malloc(sizeof(int) * size);
+//    if (!sendCounts) {
+//        free(sendCounts);
+//        perror("Memory error");
+//        return ENOMEM;
+//    }
+//    int countForProcess = matrix->cols / size;
+//
+//    for (int i = 0; i < size; i++) {
+//        sendCounts[i] = countForProcess;
+//        displs[i] = i;
+//    }
+//
+//    MPI_Scatterv(matrix->data, sendCounts, displs, MPIdata->colType,
+//                 proccesMatrixCol->data, countForProcess, MPIdata->colType, 0, MPIdata->commCol);
+//
+//    free(sendCounts);
+//    free(displs);
+//    return 0;
+//}
 
 void forwardStep1(MPIData *MPIdata, Matrix *matrix, Matrix *proccesMatrixRow) {
     int coords[2];
@@ -268,8 +268,9 @@ int main(int argc, char *argv[]) {
     clock_t start, end;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
+    double cpu_time_used;
     if (rank == 0){
-        double cpu_time_used;
+
         start = clock();
     }
     Matrix matrix1;
@@ -339,7 +340,7 @@ int main(int argc, char *argv[]) {
         end = clock();
         cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 
-        printf("Прошло времени: %f секунд\n", cpu_time_used);
+        printf("Time: %f\n", cpu_time_used);
         printf("Matrix %d x %d x %d", row1, col1, col2);
         printf("size: %d\n", size);
         //PrintMatrix(result);
