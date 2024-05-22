@@ -20,9 +20,9 @@ NUMBER_OF_POINTS_Z = 384
 */
 
 enum GridParameters {
-    NUMBER_OF_POINTS_X = 10,
-    NUMBER_OF_POINTS_Y = 10,
-    NUMBER_OF_POINTS_Z = 10
+    NUMBER_OF_POINTS_X = 339,
+    NUMBER_OF_POINTS_Y = 237,
+    NUMBER_OF_POINTS_Z = 384
 };
 
 /* f(x, y, z) = x^2 + y^2 + z^2 */
@@ -311,7 +311,8 @@ void IterativeProcessOfJacobiAlgorithm(double* partOfGrid, int* countOfPlanes, i
 
     int handledBlocks = 0;
     for (int count = 0; count < currentRank; ++count) {
-        handledBlocks += countOfPlanes[count];
+        handledBlocks += countOfPlanes[count]; //храню колво обработанных блоков, котороые обработал до текущего
+        //потом надо для смещения в partOfGrid
     }
 
     double* topBorderPlane = new double[NUMBER_OF_POINTS_X * NUMBER_OF_POINTS_Y];
@@ -399,9 +400,7 @@ int main(int argc, char** argv) {
 
     double* partOfGrid = CreatePartOfGridWithPoints(countOfPlanes, currentRank);
     IterativeProcessOfJacobiAlgorithm(partOfGrid, countOfPlanes, currentRank, numberOfProcesses);
-
     CleanUp(partOfGrid, countOfPlanes);
-
     MPI_Finalize();
 
     return 0;
