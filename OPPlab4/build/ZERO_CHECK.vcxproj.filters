@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\CLion\Projects\OPP-Labs\OPPlab4\build\CMakeFiles\2c03d0248f3201585b64af1282bbabea\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{7EAFDFCC-9B77-35A9-B3CF-CA7D761EC3AF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
